@@ -1,5 +1,7 @@
+<pre>
 toolbox/
-- README.md
-- .gitignore
-- lib/
-  - common.sh
+├─ README.md
+├─ .gitignore
+└─ lib/
+   └─ common.sh
+</pre>
