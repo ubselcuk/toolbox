@@ -5,6 +5,8 @@ toolbox/
 ├─ lib/
 │  └─ common.sh
 └─ system/
+   ├─ firewall/
+   │  └─ configure-ufw.sh
    └─ shell/
-      └─ bashrc.sh
+      └─ configure-bashrc.sh
 </pre>
