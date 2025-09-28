@@ -2,6 +2,9 @@
 toolbox/
 ├─ README.md
 ├─ .gitignore
-└─ lib/
-   └─ common.sh
+├─ lib/
+│  └─ common.sh
+└─ system/
+   └─ shell/
+      └─ bashrc.sh
 </pre>
