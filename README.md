@@ -10,6 +10,8 @@ toolbox/
 └─ system/
    ├─ firewall/
    │  └─ configure-ufw.sh
+   ├─ logging/
+   │  └─ setup-rsyslog.sh
    ├─ shell/
    │  └─ configure-bashrc.sh
    └─ time/
