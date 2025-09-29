@@ -10,6 +10,8 @@ toolbox/
 └─ system/
    ├─ firewall/
    │  └─ configure-ufw.sh
-   └─ shell/
-      └─ configure-bashrc.sh
+   ├─ shell/
+   │  └─ configure-bashrc.sh
+   └─ time/
+      └─ configure-timezone.sh
 </pre>
