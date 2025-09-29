@@ -1,3 +1,6 @@
+# Hey! Don't forget to set your SA password in a .env file or in your environment variables.
+# MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+
 services:
   mssql:
     image: mcr.microsoft.com/mssql/server:2022-latest
