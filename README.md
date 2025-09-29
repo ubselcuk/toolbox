@@ -2,9 +2,16 @@
 toolbox/
 ├─ README.md
 ├─ .gitignore
+├─ database/
+│  └─ mssql/
+│     ├─ active-sessions.sql
+│     ├─ check-version.sql
+│     └─ list-databases.sql
 ├─ docker/
 │  ├─ cleanup.sh
-│  └─ install.sh
+│  ├─ install.sh
+│  └─ mssql/
+│     └─ docker-compose.yml
 ├─ lib/
 │  └─ common.sh
 ├─ system/
