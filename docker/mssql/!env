@@ -1,0 +1,5 @@
+# Hi. This is the environment configuration for the MSSQL Docker container.
+# To actually use it, copy or rename this file to '.env' in the same directory.
+#
+MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+MSSQL_CONTAINER_NAME=toolbox-mssql
