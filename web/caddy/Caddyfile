@@ -1,0 +1,17 @@
+example.com, www.example.com {
+  root * /var/www/example
+  file_server
+  log {
+    output file /var/log/caddy/example.log {
+      roll_size 10MiB      # rotate at 10 MB
+      roll_keep 10         # keep 10 old files
+      roll_keep_for 720h   # keep logs 30 days
+    }
+    format json
+  }
+}
+
+example.com, www.example.com {
+  reverse_proxy localhost:5000
+  # Add logging..
+}
