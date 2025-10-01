@@ -32,6 +32,8 @@ toolbox/
 │  └─ time/
 │     └─ configure-timezone.sh
 └─ web/
+   ├─ caddy/
+   │  └─ install-caddy.sh
    └─ nginx/
       └─ install-nginx.sh
 </pre>
