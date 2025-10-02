@@ -52,7 +52,6 @@ docker run -d \
   --health-timeout=5s \
   --health-retries=20 \
   --health-start-period=60s \
-  --stop-grace-period=30s \
   --memory=2g \
   --cpus="1.5" \
   --log-driver=json-file \
