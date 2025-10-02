@@ -31,10 +31,12 @@ toolbox/
 │  │  └─ configure-bashrc.sh
 │  └─ time/
 │     └─ configure-timezone.sh
-└─ web/
-   ├─ caddy/
-   │  ├─ Caddyfile
-   │  └─ install-caddy.sh
-   └─ nginx/
-      └─ install-nginx.sh
+├─ web/
+│  ├─ caddy/
+│  │  ├─ Caddyfile
+│  │  └─ install-caddy.sh
+│  └─ nginx/
+│     └─ install-nginx.sh
+└─ workflows/
+   └─ deployment.yml
 </pre>

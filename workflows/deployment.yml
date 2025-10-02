@@ -1,0 +1,116 @@
+name: Deploy to Production
+
+on:
+  # Trigger this workflow whenever code is pushed to the production branch
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # Link this job to the "prod" environment so its secrets can be used
+    environment: prod
+
+    steps:
+    # -----------------
+    # Checkout the code
+    # -----------------
+    - name: Checkout source code
+      uses: actions/checkout@v4
+
+    # -------------------------------------------------
+    # Verify required secrets are present before deploy
+    # -------------------------------------------------
+    - name: Check required secrets
+      run: |
+        test -n "${{ secrets.SSH_HOST }}"     || { echo "SSH_HOST secret is empty"; exit 1; }
+        test -n "${{ secrets.SSH_USER }}"     || { echo "SSH_USER secret is empty"; exit 1; }
+        test -n "${{ secrets.SSH_PASSWORD }}" || { echo "SSH_PASSWORD secret is empty"; exit 1; }
+
+    # --------------------------------------
+    # Check Docker installation on CI runner
+    # --------------------------------------
+    - name: Check Docker is installed and running
+      run: |
+        command -v docker >/dev/null || { echo "Docker CLI not found"; exit 1; }
+        docker info >/dev/null || { echo "Docker daemon is not responding"; exit 1; }
+
+    # ------------------------------
+    # Build the Docker image locally
+    # ------------------------------
+    - name: Build Docker image
+      run: docker build -t app:latest .
+
+    # ----------------------------------------
+    # Save the image as a tarball for transfer
+    # ----------------------------------------
+    - name: Save image to tar
+      run: docker save app:latest -o app.tar
+
+    # -----------------------------------
+    # Ensure target dir exists before SCP
+    # -----------------------------------
+    - name: Prepare remote directory
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        script_stop: true
+        script: |
+          set -e
+          mkdir -p /opt/deployments
+
+    # --------------------------------------------------
+    # Upload Docker image to the remote server using SCP
+    # --------------------------------------------------
+    - name: Upload image to server (SCP)
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        source: "app.tar"
+        target: "/opt/deployments/"
+        overwrite: true  # replace existing file if present
+
+    # -----------------------------------------------------------
+    # Connect via SSH and deploy the container on the remote host
+    # -----------------------------------------------------------
+    - name: Run container on server (SSH)
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        # port: ${{ secrets.SSH_PORT }}   # optional, defaults to 22
+        script_stop: true
+        script: |
+          set -euo pipefail
+
+          echo "Checking Docker installation on remote host..."
+          command -v docker >/dev/null || { echo "Docker CLI not found"; exit 1; }
+          docker info >/dev/null || { echo "Docker daemon not responding"; exit 1; }
+
+          echo "Removing any existing container named 'app'..."
+          docker ps -a --filter "name=^app$" --format '{{.Names}}' | grep -q '^app$' \
+            && docker stop app && docker rm app || true
+
+          echo "Loading the new Docker image..."
+          docker load -i /opt/deployments/app.tar
+
+          echo "Running the new container..."
+          docker run -d \
+            --log-opt max-size=10m --log-opt max-file=3 \
+            --name app \
+            --restart unless-stopped \
+            -p 127.0.0.1:5000:80 \
+            app:latest
+
+          echo "Cleaning up old files and dangling images..."
+          rm -f /opt/deployments/app.tar || true
+          docker image prune -f || true
+
+          echo "Deployment finished successfully."
