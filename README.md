@@ -6,7 +6,8 @@ toolbox/
 │  └─ mssql/
 │     ├─ active-sessions.sql
 │     ├─ check-version.sql
-│     └─ list-databases.sql
+│     ├─ list-databases.sql
+│     └─ restore-history.sql
 ├─ docker/
 │  ├─ cleanup.sh
 │  ├─ install.sh
