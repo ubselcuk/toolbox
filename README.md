@@ -6,6 +6,7 @@ toolbox/
 │  └─ mssql/
 │     ├─ active-sessions.sql
 │     ├─ check-version.sql
+│     ├─ event-slow-queries.sql
 │     ├─ list-databases.sql
 │     └─ restore-history.sql
 ├─ docker/
