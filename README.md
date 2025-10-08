@@ -16,7 +16,8 @@ toolbox/
 │  ├─ mssql/
 │  │  ├─ !env
 │  │  ├─ backup.sh
-│  │  └─ initialize.sh
+│  │  ├─ initialize.sh
+│  │  └─ restore.sh
 │  └─ postgresql/
 │     ├─ !env
 │     └─ initialize.sh
