@@ -33,3 +33,16 @@ remove_container() {
         info "Container '$CONTAINER_NAME' does not exist. No need to stop or remove."
     fi
 }
+
+ensure_network() {
+    local NETWORK_NAME=$1
+    info "Checking if Docker network '$NETWORK_NAME' exists..."
+
+    if docker network inspect "$NETWORK_NAME" >/dev/null 2>&1; then
+        info "Docker network '$NETWORK_NAME' already exists."
+    else
+        info "Docker network '$NETWORK_NAME' not found. Creating..."
+        docker network create "$NETWORK_NAME"
+        success "Docker network '$NETWORK_NAME' created successfully."
+    fi
+}

@@ -22,6 +22,7 @@ sleep 10
 check_docker
 remove_container "$MSSQL_CONTAINER_NAME"
 
+# --- VOLUME ---
 info "Creating volume directory for '$MSSQL_CONTAINER_NAME'..."
 mkdir -p "/opt/volumes/$MSSQL_CONTAINER_NAME"
 info "Volume directory created at /opt/volumes/$MSSQL_CONTAINER_NAME"
@@ -29,6 +30,7 @@ info "Setting permissions on /opt/volumes/$MSSQL_CONTAINER_NAME ..."
 chown -R 10001:10001 /opt/volumes/$MSSQL_CONTAINER_NAME
 info "Permissions set."
 
+# --- BACKUP ---
 info "Creating backup directory for '$MSSQL_CONTAINER_NAME'..."
 mkdir -p "/opt/backups/$MSSQL_CONTAINER_NAME"
 info "Backup directory created at /opt/backups/$MSSQL_CONTAINER_NAME"
@@ -36,8 +38,12 @@ info "Setting permissions on /opt/backups/$MSSQL_CONTAINER_NAME ..."
 chown -R 10001:10001 /opt/backups/$MSSQL_CONTAINER_NAME
 info "Permissions set."
 
+# --- NETWORK ---
+ensure_network "${MSSQL_CONTAINER_NAME}_network"
+
 docker run -d \
   --name "$MSSQL_CONTAINER_NAME" \
+  --network "${MSSQL_CONTAINER_NAME}_network" \
   --restart unless-stopped \
   -e "ACCEPT_EULA=Y" \
   -e "MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD" \
