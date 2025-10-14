@@ -48,6 +48,9 @@ docker run -d \
   -e "ACCEPT_EULA=Y" \
   -e "MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD" \
   -e "MSSQL_PID=Express" \
+  -e "MSSQL_MEMORY_LIMIT_MB=1536" \
+  -e "MSSQL_TCP_PORT=1433" \
+  -e "MSSQL_AGENT_ENABLED=0" \
   -e "MSSQL_COLLATION=Turkish_CI_AS" \
   -e "TZ=Europe/Istanbul" \
   -p 1433:1433 \
