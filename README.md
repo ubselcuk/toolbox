@@ -21,6 +21,11 @@ toolbox/
 │  └─ postgresql/
 │     ├─ !env
 │     └─ initialize.sh
+├─ k6/
+│  ├─ crocodiles.js
+│  ├─ example.js
+│  ├─ quickpizza.js
+│  └─ run.sh
 ├─ lib/
 │  └─ common.sh
 ├─ system/
