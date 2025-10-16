@@ -128,5 +128,23 @@ docker run -d \
 
 echo "MSSQL container '$MSSQL_CONTAINER_NAME' started successfully!"
 
-echo "Disable enforce password policy"
-docker exec -it "$MSSQL_CONTAINER_NAME" /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "$MSSQL_SA_PASSWORD" -Q "ALTER LOGIN SA WITH CHECK_POLICY=OFF"
+echo "Waiting for SQL Server to be ready..."
+for i in {1..30}; do
+  if docker exec "$MSSQL_CONTAINER_NAME" /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U SA -P "$MSSQL_SA_PASSWORD" -Q "SELECT 1" &>/dev/null; then
+    echo "SQL Server is ready after $((i*2)) seconds!"
+    break
+  fi
+  echo "SQL Server not ready yet... ($i)"
+  sleep 2
+done
+
+if [ "$i" -eq 30 ]; then
+  echo "Error: SQL Server did not become ready in time."
+  exit 1
+fi
+
+# Disable SA password policy
+echo "Disabling SA password policy..."
+docker exec "$MSSQL_CONTAINER_NAME" /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U SA -P "$MSSQL_SA_PASSWORD" -Q "ALTER LOGIN SA WITH CHECK_POLICY=OFF, CHECK_EXPIRATION=OFF"
+
+echo "SA password policy disabled successfully!"
