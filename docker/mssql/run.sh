@@ -127,3 +127,6 @@ docker run -d \
   mcr.microsoft.com/mssql/server:2022-latest
 
 echo "MSSQL container '$MSSQL_CONTAINER_NAME' started successfully!"
+
+echo "Disable enforce password policy"
+docker exec -it "$MSSQL_CONTAINER_NAME" /opt/mssql-tools18/bin/sqlcmd -S localhost -U SA -P "$MSSQL_SA_PASSWORD" -Q "ALTER LOGIN SA WITH CHECK_POLICY=OFF"
