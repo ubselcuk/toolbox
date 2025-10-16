@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 . "$(dirname "$0")/../../lib/common.sh"
 
+# MSSQL_SA_PASSWORD=YourStrong!Passw0rd
+# MSSQL_CONTAINER_NAME=toolbox-mssql
+# MSSQL_DB_NAME=name
+# ZIP_PASSWORD=123456
+# SMTP_SERVER="smtp.example.com"
+# SMTP_PORT=465
+# SMTP_USER="example@example.com"
+# SMTP_PASS="yourpassword"
+# SMTP_FROM="title <example@example.com>" 
+# SMTP_TO=example@example.com
+
 load_env
 require_root
 
