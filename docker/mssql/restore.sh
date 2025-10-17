@@ -71,6 +71,9 @@ if [[ ! -f "$BACKUP_FILE" ]]; then
     exit 1
 fi
 
+# --- COPY BACKUP FILE TO CONTAINER ---
+mv $BACKUP_FILE "$MSSQL_BACKUP_PATH/"
+
 # --- MAP HOST BACKUP PATH TO CONTAINER ---
 CONTAINER_BACKUP_PATH="/var/opt/mssql/backups/$(basename "$BACKUP_FILE")"
 
