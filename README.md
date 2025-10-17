@@ -14,9 +14,9 @@ toolbox/
 │  ├─ install.sh
 │  ├─ utility.sh
 │  ├─ mssql/
-│  │  ├─ .env
 │  │  ├─ backup.sh
 │  │  ├─ restore.sh
+│  │  ├─ run.env
 │  │  └─ run.sh
 │  └─ postgresql/
 │     ├─ !env
