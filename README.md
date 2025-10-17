@@ -5,8 +5,10 @@ toolbox/
 ├─ database/
 │  └─ mssql/
 │     ├─ active-sessions.sql
+│     ├─ backup.sql
 │     ├─ check-version.sql
 │     ├─ event-slow-queries.sql
+│     ├─ index-fragmentation.sql
 │     ├─ list-databases.sql
 │     └─ restore-history.sql
 ├─ docker/
