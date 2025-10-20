@@ -22,8 +22,8 @@ toolbox/
 │  │  ├─ run.env
 │  │  └─ run.sh
 │  └─ postgresql/
-│     ├─ !env
-│     └─ initialize.sh
+│     ├─ pgadmin.sh
+│     └─ run.sh
 ├─ k6/
 │  ├─ crocodiles.js
 │  ├─ example.js
