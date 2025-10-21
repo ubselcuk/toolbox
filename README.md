@@ -3,14 +3,19 @@ toolbox/
 ├─ README.md
 ├─ .gitignore
 ├─ database/
-│  └─ mssql/
-│     ├─ active-sessions.sql
-│     ├─ backup.sql
+│  ├─ mssql/
+│  │  ├─ active-sessions.sql
+│  │  ├─ backup.sql
+│  │  ├─ check-version.sql
+│  │  ├─ event-slow-queries.sql
+│  │  ├─ index-fragmentation.sql
+│  │  ├─ list-databases.sql
+│  │  └─ restore-history.sql
+│  └─ postgresql/
 │     ├─ check-version.sql
-│     ├─ event-slow-queries.sql
-│     ├─ index-fragmentation.sql
-│     ├─ list-databases.sql
-│     └─ restore-history.sql
+│     ├─ database-crud.sql
+│     ├─ date-time.sql
+│     └─ table-crud.sql
 ├─ docker/
 │  ├─ cleanup.sh
 │  ├─ install.sh
