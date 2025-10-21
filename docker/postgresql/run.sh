@@ -7,6 +7,7 @@ docker run \
   --name postgres \
   --restart unless-stopped \
   -p 5432:5432 \
+  -e TZ=Europe/Istanbul \
   -e POSTGRES_USER="foo" \
   -e POSTGRES_PASSWORD="bar" \
   -e POSTGRES_DB="default" \

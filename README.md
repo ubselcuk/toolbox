@@ -23,6 +23,7 @@ toolbox/
 │  │  └─ run.sh
 │  └─ postgresql/
 │     ├─ pgadmin.sh
+│     ├─ psql.sh
 │     └─ run.sh
 ├─ k6/
 │  ├─ crocodiles.js
