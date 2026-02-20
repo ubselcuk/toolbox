@@ -12,6 +12,10 @@ toolbox/
 │  │  ├─ list-databases.sql
 │  │  └─ restore-history.sql
 │  └─ postgresql/
+│     ├─ view/
+│     │  ├─ active_queries.sql
+│     │  ├─ index_usage.sql
+│     │  └─ table_statistics.sql
 │     ├─ check-version.sql
 │     ├─ database-crud.sql
 │     ├─ date-time.sql
