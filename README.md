@@ -50,8 +50,10 @@ toolbox/
 │  │  └─ configure-fail2ban.sh
 │  ├─ shell/
 │  │  └─ configure-bashrc.sh
-│  └─ time/
-│     └─ configure-timezone.sh
+│  ├─ time/
+│  │  └─ configure-timezone.sh
+│  └─ user/
+│     └─ user.sh
 ├─ web/
 │  ├─ caddy/
 │  │  ├─ Caddyfile
